@@ -1,18 +1,17 @@
 using APIBackend.DTOS;
+using APIBackend.Error;
 using AutoMapper;
 using Core.Entities;
 using Core.Interface;
 using Core.Specification;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace APIBackend.Controllers
 {
 
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseAPIController
     {
         public IGenericRepository<Product> Productrepo { get; }
         public IGenericRepository<ProductBrand> ProductBrandRepo { get; }
@@ -38,10 +37,13 @@ namespace APIBackend.Controllers
             return Ok(Mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDTO>>(products));  
         }
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(APIResponce),StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDTO>> GetProduct(int id)
         {
             var spec =new ProductsWithTypesandBrandsSpecification(id);
             var products = await Productrepo.GetEntitywithSpec(spec);
+            if (products == null) return NotFound(new APIResponce(404));
             return Ok(Mapper.Map<Product,ProductToReturnDTO>(products));
         }
         [HttpGet("Brands")]
