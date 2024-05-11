@@ -30,6 +30,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -64,9 +67,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-              "sslCert": "ssl/localhost.pem",
-              "sslKey": "ssl/localhost-key.pem",
-              "ssl": true
+            "sslCert": "ssl/localhost.pem",
+            "sslKey": "ssl/localhost-key.pem",
+            "ssl": true
           },
           "configurations": {
             "production": {
@@ -98,11 +101,8 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/bootstrap.min.css",
-              "node_modeles/ngx-bootstrap/datepicker/ds-datepicker.css", 
-              "node_modeles/font-awesome/css/font-awesome.min.css", 
+             
               "src/styles.scss"
-
             ],
             "scripts": []
           }
@@ -111,6 +111,6 @@
     }
   },
   "cli": {
-    "analytics": "702303eb-12d7-4032-b624-4e4e5d7ca052"
+    "analytics": "b9973d0a-436f-4214-a903-bc97d276cb20"
   }
 }
