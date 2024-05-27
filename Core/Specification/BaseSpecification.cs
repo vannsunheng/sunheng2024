@@ -36,8 +36,8 @@ namespace Core.Specification
         protected void AddOrderBy(Expression<Func<T,object>> orderByExpression){
             OrderBy=orderByExpression;
         }
-          protected void AddOrderByDescending(Expression<Func<T,object>> orderByDescExpression){
-            OrderBy=orderByDescExpression;
+        protected void AddOrderByDescending(Expression<Func<T,object>> orderByDescExpression){
+            OrderByDescending=orderByDescExpression;
         }
         protected void ApplyPaging(int skip, int take){
             Skip=skip;

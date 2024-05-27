@@ -19,9 +19,9 @@ namespace Core.Specification
             AddInclude(x => x.productBrand);
             AddOrderBy(x => x.Name);
             ApplyPaging(specParams.PageSize *(specParams.PageIndex-1), specParams.PageSize);
-            if (!string.IsNullOrEmpty(specParams.Sort))
+            if (!string.IsNullOrEmpty(specParams.sort))
             {
-                switch (specParams.Sort)
+                switch (specParams.sort)
                 {
                     case "priceAsc":
                         AddOrderBy(x => x.Price);

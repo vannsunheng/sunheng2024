@@ -35,12 +35,12 @@ namespace APIBackend.Controllers
             var spec =new ProductsWithTypesandBrandsSpecification(ProductParams);
 
             var countspec=new ProductWithFiltersForCountSpecification(ProductParams);
-            var totalItem=await Productrepo.CountAsync(spec);
+            var totalItem=await Productrepo.CountAsync(countspec);
 
             var products = await Productrepo.ListAsynce(spec);
             var data=Mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDTO>>(products);
 
-            return Ok(new Pagination<ProductToReturnDTO>(ProductParams.PageIndex,ProductParams.PageSize,totalItem,data));  
+            return Ok(new Pagination<ProductToReturnDTO>(ProductParams.PageIndex,totalItem,ProductParams.PageSize,data));  
         }
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
