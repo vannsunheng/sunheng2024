@@ -26,7 +26,7 @@ namespace APIBackend.Controllers
         }
         [HttpGet("servererror")]
         public ActionResult GetServerError(){
-            var thing=StoreContext.products.Find(45);
+            var thing=StoreContext.products.Find(405);
             var thingtoreturn=thing.ToString();
             return Ok();
         }

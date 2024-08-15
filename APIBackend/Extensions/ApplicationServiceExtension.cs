@@ -35,7 +35,7 @@ namespace APIBackend.Extensions
 
                     var errorresponse = new APIValidationErrorResponse
                     {
-                        Error = errors
+                        Errors = errors
                     };
                     return new BadRequestObjectResult(errorresponse);
                 };

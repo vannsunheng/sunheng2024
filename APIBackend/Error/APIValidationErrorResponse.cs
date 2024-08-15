@@ -11,6 +11,7 @@ namespace APIBackend.Error
         base(400)
         {
         }
-        public IEnumerable<string> Error { get; set; }
+
+        public IEnumerable<string> Errors { get; set; }
     }
 }
