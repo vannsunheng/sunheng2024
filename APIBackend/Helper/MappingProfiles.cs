@@ -3,6 +3,7 @@ using System.Security.Cryptography.Xml;
 using APIBackend.DTOS;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Identity;
 
 namespace APIBackend.Helper
 {
@@ -14,6 +15,7 @@ namespace APIBackend.Helper
             .ForMember(xx => xx.productBrand, xxx => xxx.MapFrom(x => x.productBrand.Name))
             .ForMember(xx => xx.ProductType, xxx => xxx.MapFrom(x => x.ProductType.Name))
             .ForMember(xx => xx.PictureUrl, x => x.MapFrom<ProductUrlResolver>());
+            CreateMap<Address,AddressDTO>().ReverseMap();
         }
     }
 }

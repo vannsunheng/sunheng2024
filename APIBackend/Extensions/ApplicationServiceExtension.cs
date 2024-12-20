@@ -2,6 +2,8 @@ using APIBackend.Error;
 using Core.Interface;
 using Infrastructure.Data;
 using Infrastructure.Data.SeedData;
+using Infrastructure.Identity;
+using Infrastructure.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -19,6 +21,10 @@ namespace APIBackend.Extensions
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+            services.AddDbContext<AppIdentityDBContext>(opt =>
+            {
+                opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
+            });
             services.AddSingleton<IConnectionMultiplexer>(c=>
             {
                 var options=ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
@@ -26,6 +32,7 @@ namespace APIBackend.Extensions
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITokenServices,TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<ApiBehaviorOptions>(options =>

@@ -1,5 +1,6 @@
 using APIBackend.Error;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIBackend.Controllers
@@ -11,6 +12,11 @@ namespace APIBackend.Controllers
         {
             this.StoreContext = storeContext;
         }
+       [HttpGet("testauth")]
+       [Authorize]
+       public ActionResult<string> GetSecretText(){
+            return "This is Secret text";
+       }
         [HttpGet("NotFound")]
         public ActionResult GetNotFoundRequest(){
             var thing=StoreContext.products.Find(45);
