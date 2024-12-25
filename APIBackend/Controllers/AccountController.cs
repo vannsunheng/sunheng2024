@@ -32,7 +32,9 @@ namespace APIBackend.Controllers
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDTO>> GetCurrentUser(){
+
             var user=await UserManager.FindUserByEmailfromClaimPrinciple(User);
+            
             return  new UserDTO{
                 Email = user.Email,
                 DisplayName=user.DisplayName,
@@ -78,6 +80,10 @@ namespace APIBackend.Controllers
         }
         [HttpPost("Register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO){
+            if (CheckExistingEmail(registerDTO.Email).Result.Value){
+                return new BadRequestObjectResult(new APIValidationErrorResponse{Errors=new []
+                {"Email address already in use"}});
+            }
             var user= new AppUser{
                 Email = registerDTO.Email,
                 DisplayName=registerDTO.DisplayName,
